@@ -9,6 +9,20 @@ c. Performance of the program will increase """
 from threading import Thread
 
 print("Current Execution thread: ", threading.current_thread().getName()) # Gives the name of current running Thread
+print("Current Execution thread: ", threading.current_thread().setName('Priyanka') # Sets the name of current running Thread
+print(active_count()) # will give the active thread count
+
+      
+# To get the name of the thread
+t.getName() # t is thread obj
+'or'
+t.name
+
+# To set the name of the Thread 
+t.setName("Priyanka") 
+'or' 
+t.name = 'Priyanka' 
+    
 try:
     thread = Thread(target=func_name, args=(func_name_arg1, func_name_arg2)) # args always be in tuple
     thread.start()
@@ -30,12 +44,21 @@ except Exception as mthread_err:
 def display(): # this one take care by child thread
     for i in range(10): 
         print("child Thread: %s" % i)
+print("The no of active Threads: ", active_count())
+                  
 t = Thread(target=display) # it 't' is the thread object, creating thread object to execute display function
 t.start() # when main thready execute this line, after that child thread and main thread both will start simultaneously
                   
 # below is the main thread execution
 for i in range(5): # this for loop will taken care by main thread
     print("Main thread: %s" % s)
+
+# Enemurate: list out all active threads current running and gives the information of that particular thread 
+l = enumerate()
+for x in l:
+    print("Thread Name: ", x.name) 
+    print("Thread Identification no: ", x.ident)
+                  
 
 """ 2. Creating thread with using any class (By Extending Thread Class) """
 class MyThread(Thread):
@@ -89,10 +112,21 @@ if __name__ == "__main__":
     # starting thread 2 
     t2.start() 
   
-    # wait until thread 1 is completely executed 
-    t1.join() 
-    # wait until thread 2 is completely executed 
-    t2.join() 
-  
+    # Main Thread will wait until thread 1 is completely executed 
+    t1.join() # Main thread will execute this line
+    # main Thread wait until thread 2 is completely executed 
+    t2.join() # main thread will execute this line
+  # if we won't use join method then main thread will execute first which is print("Done!") then it will start for child thread.
+  # The purpose of use join methods is main thread will wait until child thread completes execution
+                  
     # both threads completely executed 
     print("Done!") 
+    
+    # To check the Thread Indentification Number
+    print("Main Thread indentification No: %s" % current_thread().ident)
+    print("Child Thread identification no: %s" % t.ident)
+                  
+                  
+                  
+                  
+  
