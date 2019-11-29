@@ -6,6 +6,7 @@ Assume, main thread executing, suddendly main thread is facing Memory problem th
 Garbage Collector destroies some useless objects and it free the space. Now main thread will execute smoothly 
 If main Thread facing any problem then immediately garbage Collector will provide the same free space to the main thread """
 
+'Advantage: Whenever last non-deamon terminates automatically all deamon threads will be terminated, we not required to terminate explicitly'
 # Check whether the thread is deamon or not
 t.isDeamon() 'or' t.deamon
 
@@ -33,12 +34,19 @@ If want to change the deamon nature of running thread then it will through the R
 def job1():
   print("execution completed of job1")
   t2 = Thread(target=job2)
+  print('t2 is deamon:', t2.isDeamon()) # output: True. SetDeamon as True in 't1', if t1 is deamon then t2 also deamon
   t2.start()
-  t2.isDeamon() # output: false, becoz 't1' is not deamon. SetDeamon as True in 't1', if t1 is deamon then t2 also deamon
+  t3 = thread(target=job3)
+  t3.setDeamon(False)
+  print('t3 is deamon:', t3.isDeamon()) # output: False. making setDeamon as False. 't3' is non-Deamon
+  
+  t3.start()
+  
 def job2():
   print("execution completed of job2")
+def job3():
+  print("execution completed of job 3")
 t1 = Thread(target=job1)
+t1.setDeamon(True) # # Once we set t1 as True so t1 become deamon
+print('t1 is deamon', t1.isDeamon()) # output: True
 t1.start()
-t1.setDeamon(True) # 
-t1.isDeamon() # output: False, becoz main thread is not Deamon. If setDeamon as True, then main thread become Deamon then 't1' also become Deamon
-  
