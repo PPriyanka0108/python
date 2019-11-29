@@ -1,13 +1,16 @@
 # Threading with the use of function
 # Threading is module and Thread is class name
 # Threading : Divide the program into multiple tasks, and run tasks (threads) at the same time
-# Advantage of threading: a. increase the execution speed of program b. when execution jobs are individual, then we can prefer multithreading 
+""" Advantage of threading: a. increase the execution speed of program 
+b. when execution jobs are individual, then we can prefer multithreading 
+c. Performance of the program will increase """
 
+# import Thread class from threading module
 from threading import Thread
 
 print("Current Execution thread: ", threading.current_thread().getName()) # Gives the name of current running Thread
 try:
-    thread = Thread(target=func_name, args=(func_name_arg1, func_name_arg2))
+    thread = Thread(target=func_name, args=(func_name_arg1, func_name_arg2)) # args always be in tuple
     thread.start()
     thread.join()
     for each_thread in thread_list:
@@ -62,3 +65,34 @@ for i in range(5):
     print("main Thread")                  
                
              
+# Python program to illustrate the concept of threading 
+  
+def print_cube(num): 
+    """ 
+    function to print cube of given num 
+    """
+    print("Cube: {}".format(num * num * num)) 
+  
+def print_square(num): 
+    """ 
+    function to print square of given num 
+    """
+    print("Square: {}".format(num * num)) 
+  
+if __name__ == "__main__": 
+    # creating thread 
+    t1 = Thread(target=print_square, args=(10,)) # args always be in tuple
+    t2 = Thread(target=print_cube, args=(10,)) 
+  
+    # starting thread 1 
+    t1.start() 
+    # starting thread 2 
+    t2.start() 
+  
+    # wait until thread 1 is completely executed 
+    t1.join() 
+    # wait until thread 2 is completely executed 
+    t2.join() 
+  
+    # both threads completely executed 
+    print("Done!") 
