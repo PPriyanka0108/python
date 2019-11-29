@@ -1,7 +1,8 @@
 # Threading with the use of function
 
 import threading
-import 
+
+print("Current Execution thread: ", threading.current_thread().getName()) # Gives the name of current running Thread
 try:
     thread = threading.Thread(target=func_name, args=(func_name_arg1, func_name_arg2))
     thread.start()
