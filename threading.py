@@ -1,4 +1,5 @@
 # Threading with the use of function
+# Advantage of threading: a. increase the execution speed of program b. when execution jobs are individual, then we can prefer multithreading 
 
 import threading
 
@@ -20,3 +21,13 @@ except Exception as mthread_err:
     logging.error("Encountered new issue while closing child thread(s): %s" % mthread_err)
     
       
+# 1. Creating thread without using any Class
+def display(): # this one take care by child thread
+    for i in range(10): 
+        print("child Thread: %s" % i)
+t = threading.Thread(target=display) # it 't' is the thread object, creating thread object to execute display function
+t.start() # when main thready execute this line, after that child thread and main thread both will start simultaneously
+                  
+# below is the main thread execution
+for i in range(5): # this for loop will taken care by main thread
+    print("Main thread: %s" % s)
