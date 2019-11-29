@@ -10,8 +10,6 @@ from threading import Thread
 
 print("Current Execution thread: ", threading.current_thread().getName()) # Gives the name of current running Thread
 print("Current Execution thread: ", threading.current_thread().setName('Priyanka') # Sets the name of current running Thread
-print(active_count()) # will give the active thread count
-
       
 # To get the name of the thread
 t.getName() # t is thread obj
@@ -44,7 +42,15 @@ except Exception as mthread_err:
 def display(): # this one take care by child thread
     for i in range(10): 
         print("child Thread: %s" % i)
+                  
+# Gives the active Thread count
 print("The no of active Threads: ", active_count())
+                  
+# Enemurate: list out all active threads current running and gives the information of that particular thread for Child Thread
+l = enumerate()
+for x in l:
+    print("Thread Name: ", x.name) 
+    print("Thread Identification no: ", x.ident)
                   
 t = Thread(target=display) # it 't' is the thread object, creating thread object to execute display function
 t.start() # when main thready execute this line, after that child thread and main thread both will start simultaneously
@@ -53,7 +59,7 @@ t.start() # when main thready execute this line, after that child thread and mai
 for i in range(5): # this for loop will taken care by main thread
     print("Main thread: %s" % s)
 
-# Enemurate: list out all active threads current running and gives the information of that particular thread 
+# Enemurate Method: list out all active threads current running and gives the information of that particular thread for Main thread
 l = enumerate()
 for x in l:
     print("Thread Name: ", x.name) 
