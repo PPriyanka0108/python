@@ -18,7 +18,7 @@ Reference Variable:
 #---------------------
 Reference variable is pointing to the object. By using this we can access properties and methods of class
 
-eg: r1 is r2  --> checks if both the reference variable are pointing to the same object or not
+eg: r1 is r2  #--> checks if both the reference variable are pointing to the same object or not
 
 Self variable:
 #---------------
@@ -38,7 +38,22 @@ Whenever we are creating an object this constructor will execute automatically a
 Main objective is to declare and initilalize of variables
 For every object the constructor will execute once 
 Every constructor should take atleast one argument that argument should be self then rest is the arguments
+If we are not defining constructor then python will provide the default constructor
 
+eg:
+class Test():
+    def __init__(self):
+        print('constructor execution')
+x = Test() 
+y = Test()
+z = Test()
+
+Output: for every object constructor will execute.
+    constructor execution
+    constructor execution
+    constructor execution
+    
+    
 eg: 
 class Demo:
 """This is the docstring which is document string"""
