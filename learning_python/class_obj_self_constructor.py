@@ -80,3 +80,19 @@ class Employee:
 
 e = Employee()  #--> This will create the reference variable for Class Employee
 e.info(10, 'Sita')  #--> calls the method of the class Employee. --> This one gives the value to constructor
+
+          
+          
+          
+# method                                                                        Constructor
+# --------------------------------------------------------------------------------------------------------------------------
+ 1. Name of the method can be anything                                    1. name of constructor should always be __init__()
+ 2. Method will execute whenever we call                                  2. Constructor will execute automatically whenever object creates  
+ 3. Per object method can call any no. of times                           3. Per object only once it executes
+ 4. methods contains the business logic                                   4. It declares and intialize instance variables
+ 
+          
+          
+          
+          
+          
