@@ -1,4 +1,15 @@
 Python: Everything is treated as OBJECT.
+    
+Garbage Collector:
+#######################
+1. To destroy useless or unwanted objects
+2. Memory problems are less
+3. Based on requiement we can enable and disable the garbage collector
+  eg: by using gc module
+      gc.isenabled()  # To check whether garbage collector is enabled or not
+      gc.disable()    # Disable garbage collector
+      gc.enable()     # Enable garbage collector
+
 
 Class:
 #--------
