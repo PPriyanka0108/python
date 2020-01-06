@@ -91,9 +91,9 @@ class Child(Father, Mother):      # child class inherits from Father and Mother 
       print('this is child method')
       
  obj = Child() 
+ obj.child_method()
  obj.father_method()
  obj.mother_method()
- obj.child_method()
  
 Output:
 ##########
@@ -102,10 +102,8 @@ Output:
  This is mother method
     
 Example 2:
-#############
-
-		
-#definition of the class starts here  
+#############		
+# definition of the class starts here  
 class Person:  
     #defining constructor  
     def __init__(self, personName, personAge):  
@@ -145,6 +143,55 @@ Output:
 ##########
 John
 102
+
+Explanation:
+##############
+The classes Person and Student are superclass here and Resident is the subclass.
+The class Resident extends both Person and Student to inherit the properties of both classes.
+
+Example 3:
+##############
+class A:  
+    def __init__(self):  
+        self.name = 'John'  
+        self.age = 23  
+  
+    def getName(self):  
+        return self.name  
+  
+  
+class B:  
+    def __init__(self):  
+        self.name = 'Richard'  
+        self.id = '32'  
+  
+    def getName(self):  
+        return self.name  
+  
+  
+class C(A, B):  
+    def __init__(self):  
+        A.__init__(self)  
+        B.__init__(self)  
+  
+    def getName(self):  
+        return self.name  
+  
+C1 = C()  
+print(C1.getName())  
+
+output: Richard
+
+Explanation:
+#############
+Class C inherits both A and B. And both of them has an attribute ‘name’. 
+In the constructor of C, the first constructor called is the one of A. So, the value of name in C becomes same as the value of name in A.
+But after that, when the constructor of B is called, the value of name in C is overwritten by the value of name in B.
+So, the name attribute of C retains the value ‘Richard’ when printed. 
+
+Note:
+###########
+The hierarchy becomes completely depended on the order of __init__() calls inside the subclass. 
 
 c) Hierarchical Inheritance:
 #############################
@@ -208,10 +255,185 @@ class Grandfather:
      # class Child inheriting property of class Father
      def child(self):
          print("properties of Father, child class")
-         
+obj = Child()
+obj.child()
+obj.father()
+obj.Grand_father()
+
 output:
 ########
 properties of Father, child class
 properties of Father, father class
 properties of grandfather, grand Father class
+
+
+Method Resolution Order(MRO):
+###############################
+Programs that support multiple inheritance method resolution order plays a very crucial role.
+The order in which the base classes are searched when executing a method. 
+First, the method or attribute is searched within a class and then it follows the order we specified while inheriting. 
+This order is also called Linearization of a class and set of rules are called MRO(Method Resolution Order). 
+While inheriting from another class, the interpreter needs a way to resolve the methods that are being called via an instance. 
+ 
+Example:
+##########
+# Python program showing 
+# how MRO works 
+  
+class A: 
+    def rk(self): 
+        print(" In class A") 
+class B(A): 
+    def rk(self): 
+        print(" In class B") 
+  
+r = B() 
+r.rk() 
+
+Output:
+#############
+in class B
+order:- Class B --> Class A
+
+
+Example2:
+##############
+class A: 
+    def rk(self): 
+        print(" In class A") 
+class B(A): 
+    def rk(self): 
+        print(" In class B") 
+class C(A): 
+    def rk(self): 
+        print("In class C") 
+  
+# classes ordering 
+class D(B, C): 
+    pass
+     
+r = D() 
+r.rk() 
+
+Output:
+########
+In class B
+Order:- class D --> class B --> class c --> class A
+
+	
+Methods for Method Resolution Order(MRO) of a class:
+######################################################
+To get the method resolution order of a class we can use either __mro__ attribute or mro() method. 
+By using these methods we can display the order in which methods are resolved. 
+
+Example
+#########
+# Python program to show the order 
+# in which methods are resolved 
+  
+class A: 
+    def rk(self): 
+        print(" In class A") 
+class B: 
+    def rk(self): 
+        print(" In class B") 
+  
+# classes ordering 
+class C(A, B): 
+    def __init__(self): 
+        print("Constructor C") 
+  
+r = C() 
+  
+# it prints the lookup order  
+print(C.__mro__) 
+print(C.mro())
+
+Output:
+#############
+Constructor C
+(<class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class 'object'>)
+[<class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class 'object'>]
+
+Example 2:
+##############
+class A:
+    def process(self):
+        print('A process()')
+
+
+class B:
+    pass
+
+
+class C(A, B):
+    pass
+
+
+obj = C()  
+obj.process()    
+print(C.mro())   # print MRO for class C
+
+output:
+##########
+A process()
+[<class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class 'object'>]
+
+Explanation:
+#############
+From MRO of class C, we get to know that Python looks for a method first in class C. Then it goes to A and then to B. 
+So, first it goes to super class given first in the list then second super class, from left to right order. 
+Then finally Object class, which is a super class for all classes.
+
+Example 3:
+###########
+class A:
+    def process(self):
+        print('A process()')
+
+
+class B:
+    def process(self):
+        print('B process()')
+
+class C(A, B):
+    pass
+
+obj = C()
+obj.process()
+
+
+Output: A process()
+
+Example 4:
+#############
+class A:
+    def process(self):
+        print('A process()')
+
+
+class B:
+    def process(self):
+        print('B process()')
+
+
+class C(A, B):
+    def process(self):
+        print('C process()')
+
+
+class D(C,B):
+    pass
+
+
+obj = D()
+obj.process()
+
+print(D.mro())
+
+Output:
+#########
+C process
+[<class '__main__.D'>, <class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class 'object'>]
+
 
